@@ -1,17 +1,19 @@
 #!/bin/env python3
 import csv
 import random
+import os
 
-with open('names.csv') as f:
+path = os.path.dirname(__file__)
+with open(os.path.join(path, 'names.csv')) as f:
     names = csv.reader(f)
     names = [name for name in names]
-with open('traits.csv') as f:
+with open(os.path.join(path, 'traits.csv')) as f:
     traits = csv.reader(f)
     traits = [trait for trait in traits if trait[0]]
-with open('animals.csv') as f:
+with open(os.path.join(path, 'animals.csv')) as f:
     animals = csv.reader(f)
     animals = [animal for animal in animals if animal]
-with open('jobs.csv') as f:
+with open(os.path.join(path, 'jobs.csv')) as f:
     jobs = csv.reader(f)
     jobs = [job for job in jobs if job[0]]
 
