@@ -1,6 +1,7 @@
 #!/bin/env python3
 import csv
 import random
+import os
 from collections import defaultdict
 from gen import kith, describe
 
@@ -11,17 +12,18 @@ locations = defaultdict(lambda: {
     "aesthetics": [],
     "folklores": [],
 })
-with open('natures.csv') as f:
+path = os.path.dirname(__file__)
+with open(os.path.join(path, 'natures.csv')) as f:
     natures_values = csv.reader(f)
     for nature in natures_values:
         if nature[0]:
             natures[nature[0]]["locations"] += [nature[1]]
-with open('aesthetics.csv') as f:
+with open(os.path.join(path, 'aesthetics.csv')) as f:
     aesthetics = csv.reader(f)
     for aesthetic in aesthetics:
         if aesthetic[0]:
             locations[aesthetic[0]]["aesthetics"] += [aesthetic[1]]
-with open('folklores.csv') as f:
+with open(os.path.join(path, 'folklores.csv')) as f:
     folklores = csv.reader(f)
     for folklore in folklores:
         if folklore[0]:
