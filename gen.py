@@ -17,9 +17,10 @@ with open(os.path.join(path, 'jobs.csv')) as f:
     jobs = csv.reader(f)
     jobs = [job for job in jobs if job[0]]
 
-def kith():
+def kith(trait1=None):
     name = random.choice(names)[0]
-    trait1 = random.choice(traits)[1]
+    if not trait1:
+        trait1 = random.choice(traits)[1]
     while True:
         trait2 = random.choice(traits)[1]
         if trait1 != trait2:
@@ -41,8 +42,23 @@ def kith():
     }
 
 
-if __name__ == "__main__":
-    result = kith()
+def describe(result):
     print(f"{result['name']} is a {result['pronouns'][3]} {result['animal']}.")
     print(f"{result['pronouns'][0].capitalize()} {result['pronouns'][4]} {result['traits'][0]} and {result['traits'][1]}.")
     print(f"{result['pronouns'][0].capitalize()} {result['pronouns'][4]} a {result['job']}.")
+
+
+def describe_html(result):
+    a = "a" if result['job'][0].lower() not in ['a', 'e', 'i', 'o', 'u'] else "an"
+    print(f"<p>{result['name']} is a {result['pronouns'][3]} {result['animal']}.</p>")
+
+    def trait_link(trait):
+        return "<a href='https://joshmatthews.net/wanderhome/Traits#" + trait + "'>" + trait + "</a>"
+
+    print(f"<p>{result['pronouns'][0].capitalize()} {result['pronouns'][4]} {trait_link(result['traits'][0])} and {trait_link(result['traits'][1])}.</p>")
+    print(f"<p>{result['pronouns'][0].capitalize()} {result['pronouns'][4]} {a} {result['job']}.</p>")
+
+
+if __name__ == "__main__":
+    result = kith()
+    describe(result)
