@@ -12,6 +12,8 @@ locations = defaultdict(lambda: {
     "aesthetics": [],
     "folklores": [],
 })
+name_prefixes = []
+name_suffixes = []
 path = os.path.dirname(__file__)
 with open(os.path.join(path, 'natures.csv')) as f:
     natures_values = csv.reader(f)
@@ -28,6 +30,13 @@ with open(os.path.join(path, 'folklores.csv')) as f:
     for folklore in folklores:
         if folklore[0]:
             locations[folklore[0]]["folklores"] += [folklore[1]]
+with open(os.path.join(path, 'name_stems.csv')) as f:
+    stems = csv.reader(f)
+    for stem in stems:
+        if stem[0]:
+            name_prefixes += [stem[0]]
+        if stem[1]:
+            name_suffixes += [stem[1]]
 
 def place():
     nature_choices = random.sample(list(natures.keys()), k=3)
@@ -68,8 +77,16 @@ def place():
         if choice not in place_folklores:
             place_folklores.add(choice)
 
+    name = random.choice(name_prefixes)
+    if random.choice([0, 1]):
+        name += random.choice(name_suffixes)
+    else:
+        name += " " + random.choice(name_suffixes).capitalize()
+    if random.choice([0, 1]):
+        name += "s"
+
     return {
-        "name": "Misthaven",
+        "name": name,
         "natures": nature_choices,
         "locations": location_choices,
         "folklores": list(place_folklores),
