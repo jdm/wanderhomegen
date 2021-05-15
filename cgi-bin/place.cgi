@@ -29,11 +29,14 @@ description = andify(description)
 print(f"<p>{result['name']} has aspects of {description}.</p>")
 print(f"<p>It has {andify(result['aesthetics'])}.</p>")
 print(f"<p>There are legends of {andify(linkify_traits(result['folklores']))}.</p>")
-if result['kith']:
+if True or result['kith']:
     print("<p>There are also some creatures who live here:")
-    print("<ul>")
+    print("<ul id=kith>")
     for kith in result['kith']:
         print("<li>")
         gen.describe_html(kith)
         print("</li>")
     print("</ul></p>")
+    print("<button onclick='addkith()'>Generate a kith</button>")
+
+print("<script src='../kith.js'></script>")

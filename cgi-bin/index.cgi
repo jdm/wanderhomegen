@@ -8,4 +8,4 @@ import gen
 print("Content-Type: text/html")
 print()
 result = gen.kith()
-print(gen.describe_html(kith))
+gen.describe_html(result)

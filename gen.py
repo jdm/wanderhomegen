@@ -50,6 +50,8 @@ def describe(result):
 
 def describe_html(result):
     a = "a" if result['job'][0].lower() not in ['a', 'e', 'i', 'o', 'u'] else "an"
+    if result['job'].startswith("one"):
+        a = ''
     print(f"<p>{result['name']} is a {result['pronouns'][3]} {result['animal']}.</p>")
 
     def trait_link(trait):

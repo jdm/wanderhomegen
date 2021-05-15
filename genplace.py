@@ -104,3 +104,4 @@ if __name__ == "__main__":
         print("There are also some creatures who live here:")
     for kith in result['kith']:
         describe(kith)
+    
