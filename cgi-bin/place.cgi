@@ -10,13 +10,17 @@ print("Content-Type: text/html;charset=utf-8")
 print()
 result = genplace.place()
 
-def link(name, anchor):
-    return "<a href='https://joshmatthews.net/wanderhome/" + name + "#" + anchor + "'>" + anchor + "</a>"
+def link(name, anchor, anchor_text=None):
+    text = anchor_text if anchor_text else anchor
+    return "<a href='https://joshmatthews.net/wanderhome/" + name + "#" + anchor + "'>" + text + "</a>"
 
 def andify(list):
     return ', and '.join([', '.join(list[0:-1]), list[-1]])
 
-description = list(map(lambda x: x[1] + " " + "(" + x[0] + ")", zip(result['natures'], result['locations'])))
+description = list(map(
+    lambda x: link("Natures", x[1]) + " " + "(" + link("Natures", x[0] + "_Natures", x[0]) + ")",
+    zip(result['natures'], result['locations'])
+))
 description = andify(description)
 print(f"<p>{result['name']} has aspects of {description}.</p>")
 print(f"<p>It has {andify(result['aesthetics'])}.</p>")
